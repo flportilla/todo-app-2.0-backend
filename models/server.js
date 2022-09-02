@@ -26,8 +26,6 @@ class Server {
 
         this.app.use(express.json())
 
-        this.app.use(express.static('public'));
-
         this.app.use('*', (req, res) => {
             res.sendFile(__dirname + '/public/index.html')
         })
