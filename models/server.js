@@ -16,9 +16,11 @@ class Server {
 
         this.dbConnect()
 
+
         this.middlewares()
 
         this.routes()
+
 
     }
 
@@ -27,16 +29,18 @@ class Server {
 
         this.app.use(express.json())
 
-        this.app.use('*', (req, res) => {
-            res.sendFile(path.join(__dirname, '..', 'public'))
-        })
-
+        this.app.use(express.static('public'))
 
     }
 
     routes() {
+
         this.app.use(this.paths.auth, require('../routes/auth'))
         this.app.use(this.paths.todo, require('../routes/todo'))
+
+        this.app.use('*', (req, res) => {
+            res.sendFile(path.join(__dirname, '..', 'public', 'index.html'))
+        })
     }
 
     listen() {
