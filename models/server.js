@@ -3,6 +3,7 @@ const express = require('express')
 const dbConnection = require('../db/config')
 const cors = require('cors');
 const { createServer } = require('http');
+const path = require('path');
 
 class Server {
     constructor() {
@@ -27,8 +28,10 @@ class Server {
         this.app.use(express.json())
 
         this.app.use('*', (req, res) => {
-            res.sendFile(__dirname + '/public/index.html')
+            res.sendFile(path.join(__dirname, '..', 'public', 'index.html'))
         })
+
+
     }
 
     routes() {
